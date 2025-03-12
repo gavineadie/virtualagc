@@ -11,15 +11,15 @@ import sys
 header = '''/*
   Declared to be in the Public Domain by its original author, Ron Burkey.
 
-  Filename:    DecodeDownlinkListHardcodes.c
-  Purpose:    This file is used only by DecodeDigitalDownlink.c.  It provides
-        hard-code downlist specifications for yaTelemetry.  The original
-        version of this file was manually coded, but future versions
-        may be generated via scripts such as dddUnscrape.py from
-        files ddd-*-*.tsv.  Therefore, no modification history is
-        maintained internally to this file.
-  Contact:    Ron Burkey <info@sandroid.org>
-  Ref:        http://www.ibiblio.org/apollo/index.html
+  Filename:     DecodeDownlinkListHardcodes.c
+  Purpose:      This file is used only by DecodeDigitalDownlink.c.  It provides
+                hard-code downlist specifications for yaTelemetry.  The original
+                version of this file was manually coded, but future versions
+                may be generated via scripts such as dddUnscrape.py from
+                files ddd-*-*.tsv.  Therefore, no modification history is
+                maintained internally to this file.
+  Contact:      Ron Burkey <info@sandroid.org>
+  Ref:          http://www.ibiblio.org/apollo/index.html
 */
 '''
 
@@ -70,6 +70,9 @@ for structureName in downlists:
     for line in f:
         line = line.rstrip("\n\r")
         if len(line) == 0:
+            continue
+        if line[0] == "#":
+            print("    //" + line[1:])
             continue
         fields = line.split('\t')
         if len(fields) != 6:
